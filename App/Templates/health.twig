@@ -1,0 +1,32 @@
+<div class="container-fluid">
+<!-- GRÁFICO -->
+<div class="row">
+    <div class="col">
+        <div>
+            <canvas id="chart-container"></canvas>
+        </div>
+
+        <!-- ÍNDICES LED -->
+        <div class="led-index text-center my-3">
+            <span class="led-data">🔴 Red: <span id="red-value"></span></span>
+            <span class="led-data">🌑 IR: <span id="ir-value"></span></span>
+        </div>
+    </div>
+    <div class="col col-lg-3">
+        <div class="d-flex flex-column align-items-center my-5 gap-4">
+            <div class="w-100 text-center">
+                <label for="progress1" class="form-label fw-bold fs-5 d-block mb-2"><i class="fas fa-heartbeat"></i> BPM</label>
+                <div style="width: 250px; height: 140px; margin: 0 auto;">
+                    <div id="containerBPM"></div>
+                </div>
+            </div>
+            <div class="w-100 text-center">
+                <label for="progress2" class="form-label fw-bold fs-5 d-block mb-2"><i class="fas fa-lungs"></i> SPO2 %</label>
+                <div style="width: 250px; height: 140px; margin: 0 auto;">
+                    <div id="containerSPO2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

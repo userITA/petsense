@@ -1,0 +1,12 @@
+{
+    "database":
+    {
+        "live":
+        {
+            "host": "localhost",
+            "database": "petsense",
+            "user": "ita",
+            "password": "dX2f$NL6Tu"
+        }
+    }
+}
