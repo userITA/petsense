@@ -9,22 +9,32 @@ Carpeta App:
 Es donde contiene diferentes carpetas de scripts de PHP que están orientadas en un proyecto MVC (Modelo-Vista-Controlador) que están organizados en la siguiente estructura de carpetas:  config, Controllers, Models, Views y Templates.
 
 config --> Es una carpeta donde tenemos archivos .json separados que se utilizan para guardar información importante tal como credenciales de bases de datos y demás.
+
 Controllers --> Son los scripts que reciben la petición del usuario, procesan la lógica necesaria y coordinan la interacción entre los modelos y las vistas.
+
 Models --> Se encargan de pensar la lógica que tiene que seguir la aplicación web (Consultas a bases de datos, analisís y algoritmos)
+
 Views --> Carpeta donde se encuentra scripts PHP pero que contienen código HTML para la parte visual que se renderiza y se muestra al usuario en el navegador.
+
 Templates --> Carpeta adicional que tiene scripts Twig, un motor de plantillas rapido y sencillo para PHP y que usamos para añadir más contenido a las plantillas de Views.
 
 Carpeta Core:
 Carpeta que contiene los diferentes archivos PHP que son el núcleo del framework o aplicación. Son las clases esenciales que dan soporte a todo lo demás y que hacen que la aplicación funcione correctamente. Ejemplos:
+
 Controller.php	--> Clase base que extienden todos los controladores. 
+
 App.php	--> Inicializa la aplicación, carga configuraciones, arranca el router, etc.
+
 Database.php --> Clase que maneja la conexión con la base de datos(PDO).
+
 View.php --> Renderiza las vistas para la aplicación web, cargando las plantillas HTML y Twig.
 
 Carpeta html:
 Es el directorio raiz del proyecto donde inicializa la aplicación y permite que sea accesible desde el navegador. Además contiene:
 index.php --> Archivo que lanza la aplicación. Carga el entorno, las rutas, y se inician los controladores necesarios.
+
 Assets --> Carpeta que contiene hojas de estilo (CSS), scripts JavaScript, imágenes, fuentes, íconos, etc. Importante para el diseño y la visualización de datos en la apliación web
+
 cache --> Directorio usado para almacenar archivos generados, como versiones precompiladas de plantillas .twig, fragmentos de HTML, o respuestas temporales.
 
 node_modules --> Contiene todas las dependencias y paquetes instalados a través de npm (Node Package Manager) para su uso en el Javascript de la aplicación web.
