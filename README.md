@@ -6,7 +6,8 @@ Se trata de un entorno WSL(Windows Subsystem Linux) en la que he creado un app w
 A continuación, comentaré la descripción detallada de la estructura del código:
 
 Carpeta App:
-Es donde contiene diferentes carpetas de scripts de PHP que están orientadas en un proyecto MVC (Modelo-Vista-Controlador) que están organizados en la siguiente estructura de carpetas:  config, Controllers, Models, Views y Templates
+Es donde contiene diferentes carpetas de scripts de PHP que están orientadas en un proyecto MVC (Modelo-Vista-Controlador) que están organizados en la siguiente estructura de carpetas:  config, Controllers, Models, Views y Templates.
+
 config --> Es una carpeta donde tenemos archivos .json separados que se utilizan para guardar información importante tal como credenciales de bases de datos y demás.
 Controllers --> Son los scripts que reciben la petición del usuario, procesan la lógica necesaria y coordinan la interacción entre los modelos y las vistas.
 Models --> Se encargan de pensar la lógica que tiene que seguir la aplicación web (Consultas a bases de datos, analisís y algoritmos)
