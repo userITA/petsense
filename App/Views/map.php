@@ -50,9 +50,18 @@
                     </div>
                 </div>
             </form>
+            <?php if (isset($msg)) { ?>
+                <h2><?php echo $msg; ?></h2>
+            <?php } ?>
             <div id="map" style="margin-top: 5px;"></div>
         </div>
 </body>
+<?php
+if (isset($dataLocation) && !is_null($dataLocation)) { ?>
+    <script>
+        window.dataFromPhp = <?php echo json_encode($dataLocation); ?>;
+    </script>
+<?php } ?>
 <?php echo $twig->render('head-js.twig'); ?>
 
 </html>

@@ -78,7 +78,7 @@
                 document.getElementById("strongAccelAxisY").innerHTML = Y;
                 document.getElementById("strongAccelAxisZ").innerHTML = Z;
                 document.getElementById("envTemperature").textContent = String(temp) + " ºC";
-                document.getElementById("envHumidity").textContent = String(humidity)+ " %";
+                document.getElementById("envHumidity").textContent = String(humidity) + " %";
                 document.getElementById("envPressure").textContent = String(pressure) + " hPa";
                 console.log('✅ Consulta finalizada.')
             }
@@ -122,25 +122,53 @@
     document.addEventListener("DOMContentLoaded", () => {
         // Verificar si el elemento con el ID "mapa" existe
         const mapWeb = document.getElementById('map');
+        // Verifica si el div existe
+        // Inicializamos el mapa Leaflet
+        const map = L.map('map').setView([41.65606, -0.87734], 13); // Vista inicial
 
+        // Agregamos capa base de OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
         if (mapWeb) {
-            // Verifica si el div existe
-            // Inicializamos el mapa Leaflet
-            const map = L.map('map').setView([41.65606, -0.87734], 13); // Vista inicial
+            const dateBox = document.getElementById("dateSearchGps");
+            console.log(dateBox);
+            if (dateBox) {
+                console.log("Comprobamos si se puede ver consulta PHP en JAVASCRIPT!!!");
+                console.log(window.dataFromPhp);
+                const arrayValuesLoc = window.dataFromPhp;
+                let lastX = ''; let lastY = '';
 
-            // Agregamos capa base de OpenStreetMap
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; OpenStreetMap contributors'
-            }).addTo(map);
+                arrayValuesLoc.forEach(obj => {
+                    const keyX = Object.keys(obj)[0];
+                    const keyY = Object.keys(obj)[1];
+                    const x = obj[keyX];
+                    const y = obj[keyY];
+                    lastX = obj[keyX];
+                    lastY = obj[keyY];
+                    console.log(`x: ${x}, y: ${y}`);
+                    currentMarker = L.marker([x, y])
+                        .addTo(map)
+                        .bindPopup(`📍 Última ubicación:<br>Lat: ${x}, Lon: ${y}`)
+                        .openPopup();
+                });
 
-            // Ejecutamos gpsTracker
-            console.log("Elemento con ID 'mapa' encontrado. Ejecutando gpsTracker...");
-            gpsTracker(map);
-            // Luego, ejecutamos gpsTracker cada 5 segundos
-            setInterval(() => {
-                console.log("Ejecutando gpsTracker cada 5 segundos...");
+                currentCircle = L.circle([lastX, lastY], {
+                    color: 'blue',
+                    fillColor: 'blue',
+                    fillOpacity: 0.2,
+                    radius: 100  // Radio del círculo en metros
+                }).addTo(map);
+            } else {
+                // Ejecutamos gpsTracker
+                console.log("Elemento con ID 'mapa' encontrado. Ejecutando gpsTracker...");
                 gpsTracker(map);
-            }, 60000);
+                // Luego, ejecutamos gpsTracker cada 5 segundos
+                setInterval(() => {
+                    console.log("Ejecutando gpsTracker cada 5 segundos...");
+                    gpsTracker(map);
+                }, 60000);
+            }
         } else {
             console.warn("No se encontró el elemento con ID 'mapa'.");
         }
@@ -642,7 +670,7 @@
                 const Z = accelArray.find(c => c.field === "z_axis")?.valor || 0;
                 accelArray.length = 0;
 
-                if ((X >= 0) || (Y >= 0) || (Z >= 0)) {
+                if ((X >= 0) || (Y > 0) || (Z >= 0)) {
                     const timestamp = new Date().toLocaleTimeString();
                     graphAccelerometer.data.labels.push(timestamp);
                     graphAccelerometer.data.datasets[0].data.push(X);
@@ -662,7 +690,7 @@
                     graphAccelerometer.update();
                 }
 
-                if ((X == 0) || (Y == 0) || (Z == 0)) {
+                if ((X <= 0) || (Y <= 0) || (Z <= 0)) {
                     document.getElementById("dog-walk").style.filter = "opacity(30%)";
                     document.getElementById("dog-still").style.filter = "none";
                     document.getElementById("movementStatus").innerHTML = "💤 En reposo";
